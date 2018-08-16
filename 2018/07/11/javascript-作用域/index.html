@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="引言作用域是javascript的基础之一，如果你还不了解作用域及相关知识就继续往下看吧 作用域声明变量的位置决定了变量的作用域123function test()&amp;#123;	var a = 1&amp;#125; 这个例子中，变量a在函数test()里声明，所以变量a的作用域为整个函数体 在两个函数体中，同名变量互不影响12345678910function test1()&amp;#123;	var a =">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript 作用域">
+<meta property="og:url" content="http://carrlee.cn/2018/07/11/javascript-作用域/index.html">
+<meta property="og:site_name" content="CarrLee7">
+<meta property="og:description" content="引言作用域是javascript的基础之一，如果你还不了解作用域及相关知识就继续往下看吧 作用域声明变量的位置决定了变量的作用域123function test()&amp;#123;	var a = 1&amp;#125; 这个例子中，变量a在函数test()里声明，所以变量a的作用域为整个函数体 在两个函数体中，同名变量互不影响12345678910function test1()&amp;#123;	var a =">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-16T16:37:35.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript 作用域">
+<meta name="twitter:description" content="引言作用域是javascript的基础之一，如果你还不了解作用域及相关知识就继续往下看吧 作用域声明变量的位置决定了变量的作用域123function test()&amp;#123;	var a = 1&amp;#125; 这个例子中，变量a在函数test()里声明，所以变量a的作用域为整个函数体 在两个函数体中，同名变量互不影响12345678910function test1()&amp;#123;	var a =">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>javascript 作用域</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/">Writing</a></li>
+         
+          <li><a href="/">Arichieve</a></li>
+         
+          <li><a href="http://github.com/carrlee7">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/08/16/简历/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/05/16/this到底指向哪里/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://carrlee.cn/2018/07/11/javascript-作用域/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://carrlee.cn/2018/07/11/javascript-作用域/&text=javascript 作用域"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://carrlee.cn/2018/07/11/javascript-作用域/&title=javascript 作用域"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://carrlee.cn/2018/07/11/javascript-作用域/&is_video=false&description=javascript 作用域"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript 作用域&body=Check out this article: http://carrlee.cn/2018/07/11/javascript-作用域/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://carrlee.cn/2018/07/11/javascript-作用域/&title=javascript 作用域"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://carrlee.cn/2018/07/11/javascript-作用域/&title=javascript 作用域"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://carrlee.cn/2018/07/11/javascript-作用域/&title=javascript 作用域"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://carrlee.cn/2018/07/11/javascript-作用域/&title=javascript 作用域"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://carrlee.cn/2018/07/11/javascript-作用域/&name=javascript 作用域&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#作用域"><span class="toc-number">2.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#全局作用域"><span class="toc-number">3.</span> <span class="toc-text">全局作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#变量提升"><span class="toc-number">4.</span> <span class="toc-text">变量提升</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        javascript 作用域
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">CarrLee7</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-07-11T12:26:27.000Z" itemprop="datePublished">2018-07-11</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>作用域是javascript的基础之一，如果你还不了解作用域及相关知识就继续往下看吧</p>
+<h1 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h1><p>声明变量的位置决定了变量的作用域<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个例子中，变量<em>a</em>在函数test()里声明，所以变量<em>a</em>的作用域为整个函数体</p>
+<p>在两个函数体中，同名变量互不影响<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">2</span></span><br><span class="line">	<span class="keyword">return</span> a</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(test1()) <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(test2()) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure></p>
+<p>内部函数可以访问到外部函数的变量，反之则不行<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a) <span class="comment">// 1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> b = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">//ReferenceError b is not undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>当内部变量和外部变量重复时，内部变量会覆盖外部变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">2</span></span><br><span class="line">	<span class="built_in">console</span>.log(a) <span class="comment">// 2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h1><p>不在函数内定义的变量具有全局作用域<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>顶层函数的定义也是全局变量 </p>
+<p>javascript只有一个全局作用域，如果变量没有在当前作用域找到，会继续向上查找，如果全局作用域也没有找到，会抛出错误 ReferenceError</p>
+<p>for语句中无法定义具有局部作用域的变量</p>
+<h1 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h1><p>javascript函数会扫描所有的变量声明，将所有的声明“提升”到函数顶部，但赋值不会提升<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(a)</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">// 等价于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a</span><br><span class="line">	<span class="built_in">console</span>.log(a)</span><br><span class="line">	a = <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/">Writing</a></li>
+         
+          <li><a href="/">Arichieve</a></li>
+         
+          <li><a href="http://github.com/carrlee7">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#作用域"><span class="toc-number">2.</span> <span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#全局作用域"><span class="toc-number">3.</span> <span class="toc-text">全局作用域</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#变量提升"><span class="toc-number">4.</span> <span class="toc-text">变量提升</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://carrlee.cn/2018/07/11/javascript-作用域/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://carrlee.cn/2018/07/11/javascript-作用域/&text=javascript 作用域"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://carrlee.cn/2018/07/11/javascript-作用域/&title=javascript 作用域"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://carrlee.cn/2018/07/11/javascript-作用域/&is_video=false&description=javascript 作用域"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=javascript 作用域&body=Check out this article: http://carrlee.cn/2018/07/11/javascript-作用域/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://carrlee.cn/2018/07/11/javascript-作用域/&title=javascript 作用域"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://carrlee.cn/2018/07/11/javascript-作用域/&title=javascript 作用域"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://carrlee.cn/2018/07/11/javascript-作用域/&title=javascript 作用域"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://carrlee.cn/2018/07/11/javascript-作用域/&title=javascript 作用域"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://carrlee.cn/2018/07/11/javascript-作用域/&name=javascript 作用域&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Carr Lee
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/">Writing</a></li>
+         
+          <li><a href="/">Arichieve</a></li>
+         
+          <li><a href="http://github.com/carrlee7">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-37473492-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
